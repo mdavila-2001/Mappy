@@ -34,9 +34,28 @@ fun NavigationApp(
             arguments = NavRoutes.RoutesForm.arguments
         ) { navBackStackEntry ->
 
-            val username = navBackStackEntry.arguments?.getString("username") ?: "Unknown"
+            val username = navBackStackEntry.arguments?.getString("username") ?: "Error"
             val routeId = navBackStackEntry.arguments?.getInt("routeId") ?: -1
             PlaceHolderScreen(text = "Formulario de Ruta para $username (ID: $routeId)")
+        }
+
+        composable(
+            route = NavRoutes.MapRoutes.route,
+            arguments = NavRoutes.MapRoutes.arguments
+        ) { navBackStackEntry ->
+            val routeId = navBackStackEntry.arguments?.getInt("routeId") ?: -1
+            val routeName = navBackStackEntry.arguments?.getString("routeName") ?: "Error"
+            PlaceHolderScreen(text = "Mapa de Ruta: $routeName (ID: $routeId)")
+        }
+        composable(
+            route = NavRoutes.MapForm.route,
+            arguments = NavRoutes.MapForm.arguments
+        ) { navBackStackEntry ->
+
+            val routeId = navBackStackEntry.arguments?.getInt("routeId") ?: -1
+            val routeName = navBackStackEntry.arguments?.getString("routeName") ?: "Error"
+
+            PlaceHolderScreen(text = "Editando Mapa de: $routeName (ID: $routeId)")
         }
     }
 }
