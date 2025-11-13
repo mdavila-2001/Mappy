@@ -47,7 +47,7 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation("androidx.navigation:navigation-runtime-ktx:2.9.6")
+    implementation(libs.androidx.navigation.runtime.ktx)
     runtimeOnly(libs.androidx.navigation.compose)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
