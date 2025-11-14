@@ -14,7 +14,7 @@ import retrofit2.http.Path
 
 interface ApiService {
     @GET("routes")
-    suspend fun getRoutes(): Response<List<Route>>
+    suspend fun getAllRoutes(): Response<List<Route>>
 
     @GET("routes/{username}")
     suspend fun getRoutesByUser(

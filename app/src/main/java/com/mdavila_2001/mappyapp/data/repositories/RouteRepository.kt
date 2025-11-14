@@ -11,7 +11,7 @@ class RouteRepository {
 
     suspend fun getAllRoutes(): List<Route> {
         try {
-            val response = apiService.getRoutes()
+            val response = apiService.getAllRoutes()
             if (response.isSuccessful) {
                 return response.body() ?: emptyList()
             } else {

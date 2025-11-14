@@ -25,7 +25,7 @@ fun NavigationApp(
         composable( route = NavRoutes.Splash.route ) {
             PlaceHolderScreen(text = "Splash Screen")
         }
-        composable( route = NavRoutes.login.route ) {
+        composable( route = NavRoutes.Login.route ) {
             PlaceHolderScreen(text = "Login Screen")
         }
 

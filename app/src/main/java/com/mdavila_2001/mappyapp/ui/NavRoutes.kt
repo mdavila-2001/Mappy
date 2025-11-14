@@ -5,7 +5,7 @@ import androidx.navigation.navArgument
 
 sealed class NavRoutes(val route: String) {
     object Splash : NavRoutes("splash")
-    object login : NavRoutes("login")
+    object Login : NavRoutes("login")
     object RoutesForm : NavRoutes("routes_form_screen/{username}?routeId={routeId}") {
         val arguments = listOf(
             navArgument("username") { type = NavType.StringType },
