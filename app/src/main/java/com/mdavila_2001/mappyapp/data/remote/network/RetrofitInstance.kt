@@ -1,17 +1,18 @@
 package com.mdavila_2001.mappyapp.data.remote.network
 
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
+object RetroFitInstance {
     private const val BASE_URL = "https://apipractico4.jmacboy.com/api/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
-    private val client = okhttp3.OkHttpClient.Builder()
+    private val client = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .build()
 
