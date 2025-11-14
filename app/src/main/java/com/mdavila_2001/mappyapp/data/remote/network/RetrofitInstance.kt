@@ -5,7 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetroFitInstance {
+object RetrofitInstance {
     private const val BASE_URL = "https://apipractico4.jmacboy.com/api/"
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
