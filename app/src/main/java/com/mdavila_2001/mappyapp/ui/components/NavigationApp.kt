@@ -29,7 +29,9 @@ fun NavigationApp(
         composable( route = NavRoutes.Login.route ) {
             PlaceHolderScreen(text = "Login Screen")
         }
-
+        composable( route = NavRoutes.RoutesList.route ) {
+            PlaceHolderScreen(text = "Lista de Rutas")
+        }
         composable(
             route = NavRoutes.RoutesForm.route,
             arguments = NavRoutes.RoutesForm.arguments
