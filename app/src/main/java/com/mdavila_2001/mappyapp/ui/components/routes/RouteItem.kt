@@ -24,8 +24,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mdavila_2001.mappyapp.data.remote.models.Route
+import com.mdavila_2001.mappyapp.ui.theme.MappyTheme
 
 @Composable
 fun RouteItem(
@@ -99,6 +101,27 @@ fun RouteItem(
                     Text("Cancelar")
                 }
             }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun RouteItemPreview() {
+    MappyTheme() {
+        val route = Route(
+            id = 1,
+            name = "Ruta 1",
+            username = "usuario123",
+            createdAt = "2023-01-01",
+            updatedAt = "2023-01-02"
+        )
+        RouteItem(
+            route = route,
+            onClick = {},
+            isMine = true,
+            onEditClick = {},
+            onDeleteClick = {}
         )
     }
 }
