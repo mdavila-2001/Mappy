@@ -12,14 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.mdavila_2001.mappyapp.ui.components.NavigationApp
-import com.mdavila_2001.mappyapp.ui.theme.MappyAppPractico4Moviles1Theme
+import com.mdavila_2001.mappyapp.ui.theme.Mappy
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MappyAppPractico4Moviles1Theme {
+            Mappy {
 //                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 //                    Greeting(
 //                        name = "Android",
@@ -45,7 +45,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    MappyAppPractico4Moviles1Theme {
+    Mappy {
         Greeting("Android")
     }
 }
