@@ -1,6 +1,5 @@
 package com.mdavila_2001.mappyapp.ui.components.global
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.background
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.LocationOn
@@ -16,7 +15,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.mdavila_2001.mappyapp.ui.theme.MappyTheme
-import org.w3c.dom.Text
 
 @Composable
 fun BottomNavigationBar(

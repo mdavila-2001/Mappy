@@ -8,5 +8,9 @@ data class Route(
     @SerializedName("name")
     val name: String,
     @SerializedName("username")
-    val username: String
+    val username: String,
+    @SerializedName("created_at")
+    val createdAt: String,
+    @SerializedName("updated_at")
+    val updatedAt: String,
 )

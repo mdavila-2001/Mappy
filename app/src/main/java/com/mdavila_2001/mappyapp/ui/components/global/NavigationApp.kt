@@ -1,4 +1,4 @@
-package com.mdavila_2001.mappyapp.ui.components
+package com.mdavila_2001.mappyapp.ui.components.global
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
