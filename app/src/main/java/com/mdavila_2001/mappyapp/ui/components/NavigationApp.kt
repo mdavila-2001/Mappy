@@ -33,6 +33,16 @@ fun NavigationApp(
         composable( route = NavRoutes.RoutesList.route ) {
             PlaceHolderScreen(text = "Lista de Rutas")
         }
+
+        composable(
+            route = NavRoutes.RoutesListByUser.route,
+            arguments = NavRoutes.RoutesListByUser.arguments
+        ) { navBackStackEntry ->
+
+            val username = navBackStackEntry.arguments?.getString("username") ?: "Error"
+            PlaceHolderScreen(text = "Pantalla de MIS Rutas ($username)")
+        }
+
         composable(
             route = NavRoutes.RoutesForm.route,
             arguments = NavRoutes.RoutesForm.arguments

@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.mdavila_2001.mappyapp.ui.theme.MappyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -94,11 +95,14 @@ fun AppBar(
 @Preview(showBackground = true)
 @Composable
 fun AppBarPreview() {
-    AppBar(
-        title = "Mappy App",
-        onLogoutClick = {},
-        modifier = Modifier.height(64.dp),
-        backEnabled = true,
-        onBackClick = {}
-    )
+    MappyTheme() {
+        AppBar(
+            title = "Mappy App",
+            logOutEnabled = false,
+            onLogoutClick = {},
+            modifier = Modifier.height(64.dp),
+            backEnabled = false,
+            onBackClick = {}
+        )
+    }
 }
