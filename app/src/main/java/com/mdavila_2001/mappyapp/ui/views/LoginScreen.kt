@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.mdavila_2001.mappyapp.R
+import com.mdavila_2001.mappyapp.ui.NavRoutes
 import com.mdavila_2001.mappyapp.ui.viewmodels.LoginViewModel
 
 @Composable
@@ -42,8 +43,8 @@ fun LoginScreen(
 
     LaunchedEffect(navigate) {
         if(navigate){
-            navController.navigate("routes") {
-                popUpTo("login") {
+            navController.navigate(NavRoutes.RoutesList.route) {
+                popUpTo(NavRoutes.Login.route) {
                     inclusive = true
                 }
             }

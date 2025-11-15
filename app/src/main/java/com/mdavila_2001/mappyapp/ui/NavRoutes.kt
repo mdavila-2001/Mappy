@@ -19,17 +19,8 @@ sealed class NavRoutes(val route: String) {
             val encodedUsername = username.replace(" ", "_")
             return "routes_form_screen/$encodedUsername"
         }
-
-        fun createEditRoute(username: String, routeId: Int): String {
-            val encodedUsername = username.replace(" ", "_")
-            return "routes_form_screen/$encodedUsername?routeId=$routeId"
-        }
     }
-    object RoutesList : NavRoutes("routes") {
-        fun createRoute(): String {
-            return "routes"
-        }
-    }
+    object RoutesList : NavRoutes("routes")
 
     object RoutesListByUser : NavRoutes("routes/{username}") {
         val arguments = listOf(
