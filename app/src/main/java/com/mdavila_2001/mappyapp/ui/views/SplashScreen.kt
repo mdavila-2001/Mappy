@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.mdavila_2001.mappyapp.R
-import com.mdavila_2001.mappyapp.ui.theme.Mappy
+import com.mdavila_2001.mappyapp.ui.theme.MappyTheme
 import com.mdavila_2001.mappyapp.ui.viewmodels.SplashViewModel
 
 @Composable
@@ -51,7 +51,7 @@ fun SplashScreen(
 @Preview(showBackground = true)
 @Composable
 fun SplashScreenPreview() {
-    Mappy() {
+    MappyTheme() {
         SplashScreen(
             navController = NavController(LocalContext.current)
         )
