@@ -2,12 +2,9 @@ package com.mdavila_2001.mappyapp.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import com.mdavila_2001.mappyapp.utils.SessionManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 
 class LoginViewModel(application: Application): AndroidViewModel(application) {
     private val sessionManager = SessionManager(application)
