@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mdavila_2001.mappyapp.ui.NavRoutes
+import com.mdavila_2001.mappyapp.ui.views.SplashScreen
 
 @Composable
 fun NavigationApp(
@@ -23,7 +24,7 @@ fun NavigationApp(
         modifier = modifier
     ) {
         composable( route = NavRoutes.Splash.route ) {
-            PlaceHolderScreen(text = "Splash Screen")
+            SplashScreen(navController)
         }
         composable( route = NavRoutes.Login.route ) {
             PlaceHolderScreen(text = "Login Screen")

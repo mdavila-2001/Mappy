@@ -25,14 +25,20 @@ sealed class NavRoutes(val route: String) {
             return "routes_form_screen/$encodedUsername?routeId=$routeId"
         }
     }
-    object RoutesList : NavRoutes("routes_list_screen/{username}") {
+    object RoutesList : NavRoutes("routes") {
+        fun createRoute(): String {
+            return "routes"
+        }
+    }
+
+    object RoutesListByUser : NavRoutes("routes/{username}") {
         val arguments = listOf(
             navArgument("username") { type = NavType.StringType }
         )
 
         fun createRoute(username: String): String {
             val encodedUsername = username.replace(" ", "_")
-            return "routes_list_screen/$encodedUsername"
+            return "routes/$encodedUsername"
         }
     }
     object MapRoutes : NavRoutes("map_routes_screen/{routeId}/{routeName}") {

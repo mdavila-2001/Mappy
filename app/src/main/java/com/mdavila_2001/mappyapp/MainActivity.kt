@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.mdavila_2001.mappyapp.ui.components.NavigationApp
 import com.mdavila_2001.mappyapp.ui.theme.MappyAppPractico4Moviles1Theme
 
 class MainActivity : ComponentActivity() {
@@ -19,12 +20,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MappyAppPractico4Moviles1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+                NavigationApp(
+                    modifier = Modifier
+                )
             }
         }
     }
