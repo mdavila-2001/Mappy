@@ -19,6 +19,11 @@ sealed class NavRoutes(val route: String) {
             val encodedUsername = username.replace(" ", "_")
             return "routes_form_screen/$encodedUsername"
         }
+
+        fun createEditRoute(username: String, routeId: Int): String {
+            val encodedUsername = username.replace(" ", "_")
+            return "routes_form_screen/$encodedUsername?routeId=$routeId"
+        }
     }
     object RoutesList : NavRoutes("routes")
 
@@ -39,6 +44,11 @@ sealed class NavRoutes(val route: String) {
         )
 
         fun createRoute(routeId: Int, routeName: String): String {
+            val encodedName = routeName.replace(" ", "_")
+            return "map_routes_screen/$routeId/$encodedName"
+        }
+
+        fun createEditRoute(routeId: Int, routeName: String): String {
             val encodedName = routeName.replace(" ", "_")
             return "map_routes_screen/$routeId/$encodedName"
         }

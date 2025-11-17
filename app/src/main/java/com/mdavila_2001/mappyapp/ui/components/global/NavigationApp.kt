@@ -11,6 +11,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.mdavila_2001.mappyapp.ui.NavRoutes
 import com.mdavila_2001.mappyapp.ui.views.LoginScreen
+import com.mdavila_2001.mappyapp.ui.views.RoutesFormScreen
+import com.mdavila_2001.mappyapp.ui.views.RoutesScreen
 import com.mdavila_2001.mappyapp.ui.views.SplashScreen
 
 @Composable
@@ -30,17 +32,15 @@ fun NavigationApp(
         composable( route = NavRoutes.Login.route ) {
             LoginScreen(navController)
         }
-        composable( route = NavRoutes.RoutesList.route ) {
-            PlaceHolderScreen(text = "Lista de Rutas")
+        composable(route = NavRoutes.RoutesList.route) {
+            RoutesScreen(navController, userName = null)
         }
-
         composable(
             route = NavRoutes.RoutesListByUser.route,
             arguments = NavRoutes.RoutesListByUser.arguments
         ) { navBackStackEntry ->
-
-            val username = navBackStackEntry.arguments?.getString("username") ?: "Error"
-            PlaceHolderScreen(text = "Pantalla de MIS Rutas ($username)")
+            val username = navBackStackEntry.arguments?.getString("username")
+            RoutesScreen(navController, userName = username)
         }
 
         composable(
@@ -50,7 +50,14 @@ fun NavigationApp(
 
             val username = navBackStackEntry.arguments?.getString("username") ?: "Error"
             val routeId = navBackStackEntry.arguments?.getInt("routeId") ?: -1
-            PlaceHolderScreen(text = "Formulario de Ruta para $username (ID: $routeId)")
+            val routeName = navBackStackEntry.arguments?.getString("routeName") ?: "Error"
+
+            RoutesFormScreen(
+                navController = navController,
+                username = username,
+                routeId = routeId,
+                routeName = routeName.replace("_", " ")
+            )
         }
 
         composable(

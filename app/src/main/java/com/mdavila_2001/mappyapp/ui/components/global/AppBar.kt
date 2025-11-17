@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.material.icons.Icons
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.filled.ArrowBack
@@ -38,7 +39,7 @@ fun AppBar(
     TopAppBar(
         title = {
             Box(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
