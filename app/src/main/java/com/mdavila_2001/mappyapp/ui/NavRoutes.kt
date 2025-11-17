@@ -6,12 +6,16 @@ import androidx.navigation.navArgument
 sealed class NavRoutes(val route: String) {
     object Splash : NavRoutes("splash")
     object Login : NavRoutes("login")
-    object RoutesForm : NavRoutes("routes_form_screen/{username}?routeId={routeId}") {
+    object RoutesForm : NavRoutes("routes_form_screen/{username}?routeId={routeId}&routeName={routeName}") {
         val arguments = listOf(
             navArgument("username") { type = NavType.StringType },
             navArgument("routeId") {
                 type = NavType.IntType
                 defaultValue = -1
+            },
+            navArgument("routeName") {
+                type = NavType.StringType
+                defaultValue = ""
             }
         )
 
@@ -20,9 +24,10 @@ sealed class NavRoutes(val route: String) {
             return "routes_form_screen/$encodedUsername"
         }
 
-        fun createEditRoute(username: String, routeId: Int): String {
+        fun createEditRoute(username: String, routeId: Int, routeName: String): String {
             val encodedUsername = username.replace(" ", "_")
-            return "routes_form_screen/$encodedUsername?routeId=$routeId"
+            val encodedRouteName = routeName.replace(" ", "_")
+            return "routes_form_screen/$encodedUsername?routeId=$routeId&routeName=$encodedRouteName"
         }
     }
     object RoutesList : NavRoutes("routes")

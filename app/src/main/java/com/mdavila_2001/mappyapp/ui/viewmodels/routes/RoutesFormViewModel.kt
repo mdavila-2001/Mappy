@@ -30,14 +30,14 @@ class RoutesFormViewModel: ViewModel() {
     }
 
     fun loadRoute(name: String) {
-        _uiState.update { it.copy(name) }
+        _uiState.update { it.copy(routeName = name) }
     }
 
     fun onNameChanged(newName: String) {
         _uiState.update { it.copy(routeName = newName) }
     }
 
-    fun onSaveClicked(userName: String?, routeId: Int) {
+    fun onSaveClicked(userName: String, routeId: Int) {
         if (_uiState.value.routeName.isBlank()) {
             _toastMessage.value = "Name cannot be blank"
             return

@@ -125,7 +125,7 @@ fun RoutesScreen(
                     },
                     onEditClick = { route ->
                         navController.navigate(
-                            NavRoutes.RoutesForm.createEditRoute(uiState.currentUsername, route.id)
+                            NavRoutes.RoutesForm.createEditRoute(uiState.currentUsername, route.id, route.name)
                         )
                     },
                     onDeleteClick = { route ->

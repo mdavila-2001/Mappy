@@ -14,6 +14,7 @@ import com.mdavila_2001.mappyapp.ui.views.LoginScreen
 import com.mdavila_2001.mappyapp.ui.views.RoutesFormScreen
 import com.mdavila_2001.mappyapp.ui.views.RoutesScreen
 import com.mdavila_2001.mappyapp.ui.views.SplashScreen
+import com.mdavila_2001.mappyapp.ui.views.maps.MapRoutesScreen
 
 @Composable
 fun NavigationApp(
@@ -66,7 +67,12 @@ fun NavigationApp(
         ) { navBackStackEntry ->
             val routeId = navBackStackEntry.arguments?.getInt("routeId") ?: -1
             val routeName = navBackStackEntry.arguments?.getString("routeName") ?: "Error"
-            PlaceHolderScreen(text = "Mapa de Ruta: $routeName (ID: $routeId)")
+
+            MapRoutesScreen(
+                navController = navController,
+                routeId = routeId,
+                routeName = routeName.replace("_", " ")
+            )
         }
         composable(
             route = NavRoutes.MapForm.route,

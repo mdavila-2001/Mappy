@@ -1,5 +1,6 @@
 package com.mdavila_2001.mappyapp.ui.views
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,6 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -29,14 +31,23 @@ import com.mdavila_2001.mappyapp.ui.viewmodels.routes.RoutesFormViewModel
 fun RoutesFormScreen(
     navController: NavController,
     viewModel: RoutesFormViewModel = viewModel(),
-    username: String?,
+    username: String,
     routeId: Int,
     routeName: String
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    val toastMessage by viewModel.toastMessage.collectAsState()
+    val context = LocalContext.current
+
+    LaunchedEffect(toastMessage) {
+        if (toastMessage != null) {
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+            viewModel.clearToastMessage()
+        }
+    }
 
     LaunchedEffect(Unit) {
-        viewModel.loadRoute(routeName)
+        viewModel.loadRoute(routeName.replace("_", " "))
     }
 
     LaunchedEffect(uiState.navigateBack) {
