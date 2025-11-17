@@ -119,9 +119,15 @@ fun RoutesScreen(
                     routes = filteredRoutes,
                     isMine = (uiState.selectedTab == Tab.MY_ROUTES),
                     onRouteClick = { route ->
-                        navController.navigate(
-                            NavRoutes.MapRoutes.createRoute(route.id, route.name)
-                        )
+                        if (uiState.selectedTab == Tab.MY_ROUTES) {
+                            navController.navigate(
+                                NavRoutes.MapForm.createRoute(route.id, route.name)
+                            )
+                        } else {
+                            navController.navigate(
+                                NavRoutes.MapRoutes.createRoute(route.id, route.name)
+                            )
+                        }
                     },
                     onEditClick = { route ->
                         navController.navigate(

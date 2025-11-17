@@ -31,33 +31,43 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.Polyline
 import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.rememberMarkerState
 import com.mdavila_2001.mappyapp.R
 import com.mdavila_2001.mappyapp.tools.Tools.bitmapDescriptorFromVector
 import com.mdavila_2001.mappyapp.ui.components.global.AppBar
-import com.mdavila_2001.mappyapp.ui.viewmodels.maps.MapRoutesViewModel
+import com.mdavila_2001.mappyapp.ui.viewmodels.maps.MapFormViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MapRoutesScreen(
+fun MapFormScreen(
     navController: NavController,
-    viewModel: MapRoutesViewModel = viewModel(),
+    viewModel: MapFormViewModel = viewModel(),
     routeId: Int,
     routeName: String
 ) {
     val context = LocalContext.current
 
     val uiState by viewModel.uiState.collectAsState()
+    val toastMessage by viewModel.toastMessage.collectAsState()
 
     var hasLocationPermission by remember { mutableStateOf(false) }
+    val requestPermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+            hasLocationPermission = isGranted
+            if (!isGranted) {
+                Toast.makeText(context, "Permiso de ubicación denegado", Toast.LENGTH_SHORT).show()
+            }
+        }
+    )
 
     var customIcon by remember {
         mutableStateOf<BitmapDescriptor?>(null)
@@ -67,16 +77,13 @@ fun MapRoutesScreen(
         mutableStateOf(false)
     }
 
-    val requestPermissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGranted ->
-            if (isGranted) {
-                hasLocationPermission = true
-            } else {
-                Toast.makeText(context, "Permiso de ubicación negado", Toast.LENGTH_SHORT).show()
-            }
+    LaunchedEffect(toastMessage) {
+        if (toastMessage != null) {
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+            viewModel.clearToastMessage()
         }
-    )
+    }
+
     LaunchedEffect(Unit) {
         try {
             MapsInitializer.initialize(context)
@@ -110,7 +117,7 @@ fun MapRoutesScreen(
     Scaffold(
         topBar = {
             AppBar(
-                title = routeName,
+                title = "Editando: $routeName",
                 logOutEnabled = false,
                 backEnabled = true,
                 onLogoutClick = {},
@@ -152,7 +159,6 @@ fun MapRoutesScreen(
                         null
                     }
                 }
-
                 val cameraPositionState = rememberCameraPositionState {
                     position = CameraPosition.fromLatLngZoom(
                         mapPoints.firstOrNull() ?: LatLng(-17.7833, -63.1833),
@@ -183,14 +189,38 @@ fun MapRoutesScreen(
                 GoogleMap(
                     modifier = Modifier.fillMaxSize(),
                     cameraPositionState = cameraPositionState,
-                    properties = MapProperties(isMyLocationEnabled = true)
+                    properties = MapProperties(isMyLocationEnabled = true),
+                    onMapClick = { latlng ->
+                        viewModel.addLocation(latlng, routeId)
+                    }
                 ) {
-                    mapPoints.forEach { point ->
-                        Marker(
-                            state = MarkerState(position = point),
-                            title = "Ubicación",
-                            icon = customIcon
-                        )
+                    uiState.locations.forEach { location ->
+                        val lat = location.latitude
+                        val lng = location.longitude
+                        if (lat != 0.0 && lng != 0.0) {
+                            val markerState = rememberMarkerState(
+                                key = location.id.toString(),
+                                position = LatLng(lat, lng)
+                            )
+
+                            LaunchedEffect(markerState.position) {
+                                if (markerState.position.latitude != lat ||
+                                    markerState.position.longitude != lng) {
+                                    viewModel.updateLocation(location, markerState.position)
+                                }
+                            }
+
+                            Marker(
+                                state = markerState,
+                                title = "Ubicación",
+                                snippet = "Mantén presionado para mover, click para eliminar",
+                                icon = customIcon,
+                                draggable = true,
+                                onInfoWindowClick = {
+                                    viewModel.deleteLocation(location)
+                                }
+                            )
+                        }
                     }
                     if (mapPoints.size > 1) {
                         Polyline(
